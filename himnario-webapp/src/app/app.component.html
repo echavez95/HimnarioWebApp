@@ -12,11 +12,16 @@
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li> -->
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2 bg-dark text-light" type="search" placeholder="Buscar" aria-label="Buscar" [(ngModel)]="search" name="txtSearch">
-                <a class="btn btn-outline-light" type="button" [routerLink]="['/','index', search]">
+            <form class="d-flex" role="search" autocomplete="off">
+                <input class="form-control me-2 bg-dark text-light" 
+                        type="search" placeholder="Buscar" aria-label="Buscar" 
+                        [(ngModel)]="search" name="txtSearch" 
+                        (keyup.enter)="searchSubmit()"
+                        (keydown.enter)="searchSubmit()">
+                        
+                <button type="button" class="btn btn-outline-light" (click)="searchSubmit()">
                     <span class="bi-search"></span>
-                </a>
+                </button>
             </form>
         </div>
         </div>
