@@ -1,6 +1,6 @@
 <ng-template [ngIf]="HymnsList.length > 0" [ngIfElse]="emptyList">
     <div class="list-group" *ngFor="let hymn of HymnsList">
-        <a [routerLink]="['/','hymn', hymn.numero]" class="list-group-item d-flex justify-content-between align-items-start bg-dark text-light mt-2 hvr-grow">
+        <a [routerLink]="['/','hymn', hymn.numero]" class="list-group-item d-flex justify-content-between align-items-start bg-dark text-light mt-2 hvr-grow shadow-sm">
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{hymn.titulo}}</div>
                 {{hymn.versos[0]}}
