@@ -1,0 +1,41 @@
+<div class="card bg-dark shadow">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-2">
+                <a class="btn btn-secondary" [routerLink]="['/index']">
+                    <span class="bi-arrow-bar-left"></span>
+                </a>
+            </div>
+            <div class="col-sm-8">
+                
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1">
+                <a class="h-100 float-start d-flex align-items-center" [routerLink]="['/','hymn', PrevHymn]">
+                    <span class="bi-chevron-compact-left fs-1 text-light"></span>
+                </a>
+            </div>
+            <div class="col-sm-10 text-center">
+                <h4 class="card-title">{{SelectedHymn.titulo}}</h4>
+                <p class="card-text">
+                    <ng-template ngFor let-verso [ngForOf]="SelectedHymn.versos">
+                        <ng-template [ngIf]="verso.trim()!=''" [ngIfElse]="lineBreak">
+                            {{verso}}<br/>
+                        </ng-template>
+                    </ng-template>
+                </p>
+                <ng-template #lineBreak>
+                    <br/>
+                </ng-template>
+            </div>
+            <div class="col-sm-1">
+                <a class="h-100 float-end d-flex align-items-center" [routerLink]="['/','hymn', NextHymn]">
+                    <span class="bi-chevron-compact-right fs-1 text-light"></span>
+                </a>
+            </div>
+        </div>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    </div>
+  </div>
