@@ -14,7 +14,7 @@ export class HymnComponent {
   SelectedHymn: Hymn
   NextHymn: number = 0
   PrevHymn: number = 0
-  audioLink: string
+  audioPlayer: string = ""
 
   constructor(public hymnsService: HymnsproviderService, 
       public route: ActivatedRoute, 
@@ -29,11 +29,11 @@ export class HymnComponent {
   }
 
   getAudioFile() {
-    let filename = `${this.Number}.mp3`;
+    let filename = `${this.Number}.ogg`;
     const ref = this.firestorage.ref(filename);
-    this.audioLink = "";
+    this.audioPlayer = "";
     ref.getDownloadURL().subscribe((data) => {
-      this.audioLink = data;
+      this.audioPlayer = `<audio controls><source src="${data}" type="audio/ogg">Your browser does not support the audio element.</audio>`
     });
   }
 
