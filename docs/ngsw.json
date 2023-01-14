@@ -1,0 +1,125 @@
+{
+  "configVersion": 1,
+  "timestamp": 1673735247309,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.dffb699637fe3e6f.js",
+        "/manifest.webmanifest",
+        "/polyfills.5a8f5de5fd5b5148.js",
+        "/runtime.1f7319a37c9f6bef.js",
+        "/scripts.b7cebc1258dbcca8.js",
+        "/styles.fb3b6b615acfc3ef.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/css/bootstrap-grid.min.css",
+        "/assets/css/bootstrap-grid.min.css.map",
+        "/assets/css/bootstrap-icons.css",
+        "/assets/css/bootstrap-reboot.min.css",
+        "/assets/css/bootstrap-reboot.min.css.map",
+        "/assets/css/bootstrap-utilities.min.css",
+        "/assets/css/bootstrap-utilities.min.css.map",
+        "/assets/css/bootstrap.min.css",
+        "/assets/css/bootstrap.min.css.map",
+        "/assets/css/fonts/bootstrap-icons.woff",
+        "/assets/css/fonts/bootstrap-icons.woff2",
+        "/assets/data/himnos.json",
+        "/assets/data/himnos.json.bak",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/js/bootstrap.bundle.min.js",
+        "/assets/js/bootstrap.bundle.min.js.map",
+        "/assets/js/bootstrap.esm.min.js",
+        "/assets/js/bootstrap.esm.min.js.map",
+        "/assets/js/bootstrap.min.js",
+        "/assets/js/bootstrap.min.js.map",
+        "/bootstrap-icons.35e09da2aecdd969.woff2",
+        "/bootstrap-icons.cb4c7c05f3292543.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/css/bootstrap-grid.min.css": "e4cfe87e44943c579f3ee042a9fb99ca70a1eadf",
+    "/assets/css/bootstrap-grid.min.css.map": "7dba9d4508ecb941053c143366fa9946131e1be5",
+    "/assets/css/bootstrap-icons.css": "03006f32792e033497e9ca68373b6c3386305933",
+    "/assets/css/bootstrap-reboot.min.css": "56a06ea5f6d777904c09e8967983ed1714fc8f2a",
+    "/assets/css/bootstrap-reboot.min.css.map": "2eda460b52f461723e0befae063a9e0d64fc5b9c",
+    "/assets/css/bootstrap-utilities.min.css": "9add66e934f0b842921dba15f76d94f5d7f0fefe",
+    "/assets/css/bootstrap-utilities.min.css.map": "79d44647e41129f9ce84bf69a922e47d23f315f2",
+    "/assets/css/bootstrap.min.css": "7791dd1f3173a0d62cc39c21d2ad71fc8dad0e72",
+    "/assets/css/bootstrap.min.css.map": "aa71a94a8fed68fb0aee99428ea122181d989832",
+    "/assets/css/fonts/bootstrap-icons.woff": "75919c717ce5c5bc716bc51705c0cd0b60f4bffc",
+    "/assets/css/fonts/bootstrap-icons.woff2": "17dad0776899ad1beadabd061c34e2a22b2cde74",
+    "/assets/data/himnos.json": "8ee2ed67a0ec310eed01430bec77f64d2f5abaae",
+    "/assets/data/himnos.json.bak": "23549a8eb7e06a65a5ce71b58920a6c5779d635f",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/js/bootstrap.bundle.min.js": "90d15036ef48fcb336a135bae812b45669f19044",
+    "/assets/js/bootstrap.bundle.min.js.map": "4fee16ec6a6f78d3e8b391c1d24a61df03774402",
+    "/assets/js/bootstrap.esm.min.js": "9b50b6c5d711396d873ede4c9c504bb56d7a9c68",
+    "/assets/js/bootstrap.esm.min.js.map": "f03e74523c472f41c5a4d306cb4c80035a232bd9",
+    "/assets/js/bootstrap.min.js": "847dff899b5bcf8ee434e389e2a910ba1dbad76f",
+    "/assets/js/bootstrap.min.js.map": "ad4438dcb89a88509c0ce956fb9c43a2a6e0a863",
+    "/bootstrap-icons.35e09da2aecdd969.woff2": "17dad0776899ad1beadabd061c34e2a22b2cde74",
+    "/bootstrap-icons.cb4c7c05f3292543.woff": "75919c717ce5c5bc716bc51705c0cd0b60f4bffc",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "1020f38224ce041dd38388818e645596de998ab9",
+    "/main.dffb699637fe3e6f.js": "fc8a6d9e78eb19b85b33c9a0fbf53dc2d2f45963",
+    "/manifest.webmanifest": "13cbb09846d3257182c7db438b771f0ae7f8158c",
+    "/polyfills.5a8f5de5fd5b5148.js": "6a2e7c77d6681fd599ffaf68cbb45fb8d48dda55",
+    "/runtime.1f7319a37c9f6bef.js": "97e67bc0d3d2b2bf7acf54c82941e75826fe1763",
+    "/scripts.b7cebc1258dbcca8.js": "81c428b7b33ef85659fc075e18aa4c3545992f8d",
+    "/styles.fb3b6b615acfc3ef.css": "decf0294cc8e9713230fb4778564dcc75dd77e1a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
