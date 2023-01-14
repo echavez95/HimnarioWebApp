@@ -38,6 +38,7 @@ export class HymnComponent {
   }
 
   getAudioFile() {
+    debugger;
     if(this.status == OnlineStatusType.ONLINE)
     {
       let filename = `${this.Number}.ogg`;
