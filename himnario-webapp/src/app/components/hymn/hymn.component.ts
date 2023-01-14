@@ -16,8 +16,7 @@ export class HymnComponent {
   NextHymn: number = 0
   PrevHymn: number = 0
   audioPlayer: string = ""
-  status: OnlineStatusType; //Enum provided by ngx-online-status
-  onlineStatusCheck: any = OnlineStatusType;
+  status: OnlineStatusType = this.onlineStatusService.getStatus(); // get initial status
 
   constructor(public hymnsService: HymnsproviderService, 
       public route: ActivatedRoute, 
@@ -25,20 +24,19 @@ export class HymnComponent {
       public onlineStatusService: OnlineStatusService)
   {
     this.onlineStatusService.status.subscribe((status: OnlineStatusType) => {
-      // Retrieve Online status Type
       this.status = status;
     });
 
     this.route.paramMap.subscribe(params => {
       this.Number = parseInt(params.get('number') as string, 10);
       this.SelectedHymn = this.hymnsService.searchByNumber(this.Number);
-      this.getAudioFile();
       this.setNextLast();
+
+      this.getAudioFile();
     });
   }
 
   getAudioFile() {
-    debugger;
     if(this.status == OnlineStatusType.ONLINE)
     {
       let filename = `${this.Number}.ogg`;
