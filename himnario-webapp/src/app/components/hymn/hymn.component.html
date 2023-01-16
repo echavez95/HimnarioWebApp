@@ -1,4 +1,4 @@
-<div class="card bg-dark shadow">
+<div class="card bg-dark shadow mb-5">
     <div class="card-body">
         <!-- <div class="row">
             <div class="col-sm-2">
@@ -35,8 +35,13 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 text-center" [innerHTML]="audioPlayer"></div>
-        </div>
     </div>
   </div>
+  <ng-template [ngIf]="audioPlayer!=''">
+    <div class="fixed-bottom bg-secondary">
+        <div class="row">
+            <div class="col-12 text-center p-0" [innerHTML]="audioPlayer"></div>
+        </div>
+    </div>
+  </ng-template>
+  

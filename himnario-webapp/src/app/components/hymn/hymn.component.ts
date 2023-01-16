@@ -43,12 +43,12 @@ export class HymnComponent {
       const ref = this.firestorage.ref(filename);
       this.audioPlayer = "";
       ref.getDownloadURL().subscribe((data) => {
-        this.audioPlayer = `<audio controls><source src="${data}" type="audio/ogg">Your browser does not support the audio element.</audio>`
+        this.audioPlayer = `<audio controls class="align-middle bg-light"><source src="${data}" type="audio/ogg">Your browser does not support the audio element.</audio>`
       });
     }
     else
     {
-      this.audioPlayer = '<div class="alert alert-secondary" role="alert">Sin Conexion</div>';
+      this.audioPlayer = '';
     }
     
   }
