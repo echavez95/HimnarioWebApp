@@ -23,12 +23,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    if(this.swUpdate.isEnabled)
-    {
-      this.swUpdate.activateUpdate().then(() => {
-        alert("La aplicacion será actualizada!");
-        window.location.reload();
-      });
-    }
+    // if(this.swUpdate.isEnabled)
+    // {
+    //   this.swUpdate.activateUpdate().then(() => {
+    //     alert("La aplicacion será actualizada!");
+    //     window.location.reload();
+    //   });
+    // }
   }
 }
