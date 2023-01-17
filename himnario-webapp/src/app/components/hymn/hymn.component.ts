@@ -50,7 +50,6 @@ export class HymnComponent {
     {
       this.audioPlayer = '';
     }
-    
   }
 
   setNextLast()

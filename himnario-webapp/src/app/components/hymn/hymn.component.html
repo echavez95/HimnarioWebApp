@@ -1,15 +1,5 @@
-<div class="card bg-dark shadow mb-5">
+<div class="card bg-dark shadow" [ngClass]="{'mb-5': audioPlayer!=''}">
     <div class="card-body">
-        <!-- <div class="row">
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-8 text-center">
-                <a class="btn btn-secondary" [routerLink]="['/index']">
-                    <span class="bi-arrow-bar-left"></span> Indice
-                </a>
-            </div>
-            <div class="col-sm-2"></div>
-        </div> -->
         <div class="row">
             <div class="col-6 col-md-1 order-0 order-md-0">
                 <a class="h-100 float-start d-flex align-items-center" [routerLink]="['/','hymn', PrevHymn]">

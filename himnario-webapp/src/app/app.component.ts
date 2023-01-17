@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -23,12 +24,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-    // if(this.swUpdate.isEnabled)
-    // {
-    //   this.swUpdate.activateUpdate().then(() => {
-    //     alert("La aplicacion será actualizada!");
-    //     window.location.reload();
-    //   });
-    // }
+    if(this.swUpdate.isEnabled)
+    {
+      this.swUpdate.versionUpdates.pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
+      .subscribe(evt => {
+          document.location.reload();
+      });
+    }
   }
 }
