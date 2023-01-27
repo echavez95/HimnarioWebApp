@@ -22,7 +22,6 @@
     "@angular/service-worker": "^15.0.0",
     "bootstrap": "^5.2.3",
     "firebase": "^9.15.0",
-    "linq": "^4.0.1",
     "ngx-online-status": "^2.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

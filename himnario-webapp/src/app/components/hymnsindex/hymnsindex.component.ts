@@ -11,10 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HymnsindexComponent {
   HymnsList: Hymn[]
   search: string
+  VerseSearchResults: any[]
+  showSearchInfo: boolean
 
   constructor(public hymnsService: HymnsproviderService, public route: ActivatedRoute, private router: Router)
   {
     this.HymnsList = Array<Hymn>();
+    this.VerseSearchResults = [];
+    this.showSearchInfo = false;
     this.route.paramMap.subscribe(params => {
       this.search = params.get('search') as string;
       if(this.search!=null)
@@ -26,7 +30,12 @@ export class HymnsindexComponent {
         }
         else
         {
-          this.HymnsList = hymnsService.searchVerse(this.search);
+          if(this.search.trim()!='')
+          {
+            this.HymnsList = hymnsService.searchVerse(this.search);
+            this.VerseSearchResults = hymnsService.VerseSearchResults;
+            this.showSearchInfo = true;
+          }
         }
       }
       else 
@@ -34,5 +43,22 @@ export class HymnsindexComponent {
         this.HymnsList = hymnsService.HymnsList;
       }
     });
+  }
+
+  getVerseResults(number: number)
+  {
+    if(this.VerseSearchResults.length > 0)
+    {
+      let verseList = new Array<string>();
+      this.VerseSearchResults.filter(x=> x.number == number).map(y=> y.match).forEach(verse=> {
+        verse.forEach((v: string) => { verseList.push(v) });
+      });
+      
+      return verseList;
+    }
+    else
+    {
+      return new Array<string>();
+    }
   }
 }
