@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HymnsindexComponent {
   HymnsList: Hymn[]
   search: string
+  searchLabel: string
   VerseSearchResults: any[]
   showSearchInfo: boolean
 
@@ -21,28 +22,34 @@ export class HymnsindexComponent {
     this.showSearchInfo = false;
     this.route.paramMap.subscribe(params => {
       this.search = params.get('search') as string;
-      if(this.search!=null)
-      {
-        if(!isNaN(parseFloat(this.search)))
-        {
-          let hymn = hymnsService.searchByNumber(parseFloat(this.search));
-          if(hymn!=null) this.router.navigate(['/hymn', hymn.numero]);
-        }
-        else
-        {
-          if(this.search.trim()!='')
-          {
-            this.HymnsList = hymnsService.searchVerse(this.search);
-            this.VerseSearchResults = hymnsService.VerseSearchResults;
-            this.showSearchInfo = true;
-          }
-        }
-      }
-      else 
-      {
-        this.HymnsList = hymnsService.HymnsList;
-      }
+      this.searchVerse();
     });
+  }
+
+  searchVerse()
+  {
+    if(this.search!=null)
+    {
+      if(!isNaN(parseFloat(this.search)))
+      {
+        let hymn = this.hymnsService.searchByNumber(parseFloat(this.search));
+        if(hymn!=null) this.router.navigate(['/hymn', hymn.numero]);
+      }
+      else
+      {
+        if(this.search.trim()!='')
+        {
+          this.HymnsList = this.hymnsService.searchVerse(this.search);
+          this.VerseSearchResults = this.hymnsService.VerseSearchResults;
+          this.showSearchInfo = true;
+          this.searchLabel = this.search.slice();
+        }
+      }
+    }
+    else 
+    {
+      this.HymnsList = this.hymnsService.HymnsList;
+    }
   }
 
   getVerseResults(number: number)
@@ -51,7 +58,10 @@ export class HymnsindexComponent {
     {
       let verseList = new Array<string>();
       this.VerseSearchResults.filter(x=> x.number == number).map(y=> y.match).forEach(verse=> {
-        verse.forEach((v: string) => { verseList.push(v) });
+        verse.forEach((v: string) => { 
+          if(v[0]=='>') v = v.substring(1);
+          verseList.push(v) 
+        });
       });
       
       return verseList;

@@ -11,7 +11,12 @@
                 <p class="card-text">
                     <ng-template ngFor let-verso [ngForOf]="SelectedHymn.versos">
                         <ng-template [ngIf]="verso.trim()!=''" [ngIfElse]="lineBreak">
-                            {{verso}}<br/>
+                            <ng-template [ngIf]="verso[0]=='>'" [ngIfElse]="normal">
+                                <span class="fst-italic">{{verso.substring(1)}}</span><br/>
+                            </ng-template>
+                            <ng-template #normal>
+                                {{verso}}<br/>
+                            </ng-template>
                         </ng-template>
                     </ng-template>
                 </p>

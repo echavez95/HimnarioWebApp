@@ -1,12 +1,27 @@
 <ng-template [ngIf]="HymnsList.length > 0" [ngIfElse]="emptyList">
-    <p *ngIf="showSearchInfo">
-        <span class="fst-italic">{{HymnsList.length}}</span> resultados de busqueda para <span class="fst-italic">'{{search}}'</span>
-    </p>
-    <div class="list-group" *ngFor="let hymn of HymnsList">
+    <div class="col-sm-12 d-block d-sm-none">
+        <form class="d-flex" role="search" autocomplete="off">
+            <input class="form-control me-2 bg-dark text-light" 
+                    type="search" placeholder="Buscar" aria-label="Buscar" 
+                    [(ngModel)]="search" name="txtSearch" 
+                    (keyup.enter)="searchVerse()"
+                    (keydown.enter)="searchVerse()">
+                    
+            <button type="button" class="btn btn-outline-light" (click)="searchVerse()">
+                <span class="bi-search"></span>
+            </button>
+        </form>
+    </div>
+    <div *ngIf="showSearchInfo">
+        <div class="col-12 mt-3">
+            <span class="fst-italic">{{HymnsList.length}}</span> resultados de busqueda para <span class="fst-italic">'{{searchLabel}}'</span>
+        </div>
+    </div>
+    <div class="list-group mt-2" *ngFor="let hymn of HymnsList">
         <a [routerLink]="['/','hymn', hymn.numero]" class="list-group-item d-flex justify-content-between align-items-start bg-dark text-light mt-2 hvr-grow shadow-sm">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">{{hymn.titulo}}</div>
-                {{hymn.versos[0]}}<br/>
+                <div class="fw-bold fs-5">{{hymn.titulo}}</div>
+                <!-- {{hymn.versos[0]}}<br/> -->
                 <div class="text-muted" *ngFor="let verse of getVerseResults(hymn.numero)">
                     {{verse}} <br/>
                 </div>
