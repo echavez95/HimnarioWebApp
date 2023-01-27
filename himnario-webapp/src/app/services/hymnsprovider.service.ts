@@ -25,7 +25,7 @@ export class HymnsproviderService {
     this.VerseSearchResults = [];
 
     this.HymnsList.forEach(h => {
-      let verseMatch = h.versos.filter(v => this.removeAccents(v.trim().toLowerCase()).includes(verse.toLowerCase()));
+      let verseMatch = h.versos.filter(v => this.removeAccents(v.trim().toLowerCase()).includes(this.removeAccents(verse).toLowerCase()));
       if(verseMatch.length > 0) {
         result.push(h);
         this.VerseSearchResults.push({
