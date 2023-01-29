@@ -24,13 +24,20 @@ export class HymnsindexComponent {
     });
   }
 
+  ResetIndex()
+  {
+    this.search = '';
+    this.tagFilter = '';
+    this.LoadHymns();
+  }
+
   LoadHymns()
   {
     this.HymnsList = Array<Hymn>();
     this.VerseSearchResults = [];
     this.searchLabel = ['',''];
     
-    if(this.search!=null)
+    if(this.search!=null && this.search.trim()!='')
     {
       if(!isNaN(parseFloat(this.search)))
       {
@@ -39,16 +46,13 @@ export class HymnsindexComponent {
       }
       else
       {
-        if(this.search.trim()!='')
-        {
-          this.HymnsList = this.hymnsService.searchByVerse(this.search);
-          this.VerseSearchResults = this.hymnsService.VerseSearchResults;
-          this.searchLabel[0] = 'resultados de busqueda para';
-          this.searchLabel[1] = this.search.slice();
-        }
+        this.HymnsList = this.hymnsService.searchByVerse(this.search);
+        this.VerseSearchResults = this.hymnsService.VerseSearchResults;
+        this.searchLabel[0] = 'resultados de busqueda para';
+        this.searchLabel[1] = this.search.slice();
       }
     }
-    else if(this.tagFilter!=null)
+    else if(this.tagFilter!=null && this.tagFilter.trim()!='')
     {
       if(this.hymnsService.tagExists(this.tagFilter)) {
         this.HymnsList = this.hymnsService.searchByTag(this.tagFilter);
@@ -93,6 +97,5 @@ export class HymnsindexComponent {
     {
       this.router.navigate(['/index'], { queryParams : { tag : value }});
     }
-    
   }
 }
