@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
   {
     if(this.search.trim()!='')
     {
-      this.router.navigate(['/index', this.search]);
+      this.router.navigate(['/index'], { queryParams : { search : this.search }});
       this.search="";
     }
   }

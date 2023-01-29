@@ -4,24 +4,26 @@
             <input class="form-control me-2 bg-dark text-light" 
                     type="search" placeholder="Buscar" aria-label="Buscar" 
                     [(ngModel)]="search" name="txtSearch" 
-                    (keyup.enter)="searchVerse()"
-                    (keydown.enter)="searchVerse()">
+                    (keyup.enter)="LoadHymns()"
+                    (keydown.enter)="LoadHymns()">
                     
-            <button type="button" class="btn btn-outline-light" (click)="searchVerse()">
+            <button type="button" class="btn btn-outline-light" (click)="LoadHymns()">
                 <span class="bi-search"></span>
             </button>
         </form>
     </div>
-    <div *ngIf="showSearchInfo">
+    <div *ngIf="searchLabel[0]">
         <div class="col-12 mt-3">
-            <span class="fst-italic">{{HymnsList.length}}</span> resultados de busqueda para <span class="fst-italic">'{{searchLabel}}'</span>
+            <span class="fst-italic">{{HymnsList.length}}</span> {{searchLabel[0]}} <span class="fst-italic">'{{searchLabel[1]}}'</span>
         </div>
     </div>
-    <div class="list-group mt-2" *ngFor="let hymn of HymnsList">
-        <a [routerLink]="['/','hymn', hymn.numero]" class="list-group-item d-flex justify-content-between align-items-start bg-dark text-light mt-2 hvr-grow shadow-sm">
+    <div class="list-group user-select-none mt-2" *ngFor="let hymn of HymnsList">
+        <a (click)="redirect('hymn', hymn.numero.toString(), $event)" class="list-group-item d-flex justify-content-between align-items-start bg-dark text-light mt-2 hvr-grow shadow-sm">
             <div class="ms-2 me-auto">
                 <div class="fw-bold fs-5">{{hymn.titulo}}</div>
-                <!-- {{hymn.versos[0]}}<br/> -->
+                <ng-template ngFor let-subtema [ngForOf]="hymn.tema.subtema">
+                    <span class="fw-normal badge bg-secondary me-1" (click)="redirect('index', subtema, $event)">{{subtema}}</span>
+                </ng-template>
                 <div class="text-muted" *ngFor="let verse of getVerseResults(hymn.numero)">
                     {{verse}} <br/>
                 </div>
@@ -32,7 +34,12 @@
 </ng-template>
 <ng-template #emptyList>
     <div class="alert alert-warning text-center" role="alert">
-        No se pudo encontrar el himno {{search}} <br/>
+        <ng-template [ngIf]="search"]>
+            No se pudo encontrar un himno con la palabra o frase "{{search}}" <br/>
+        </ng-template>
+        <ng-template [ngIf]="tagFilter"]>
+            No se pudo encontrar un himno con la etiqueta "{{tagFilter}}" <br/>
+        </ng-template>
         <a [routerLink]="['/index']" class="alert-link">Volver al índice</a>
     </div>
 </ng-template>

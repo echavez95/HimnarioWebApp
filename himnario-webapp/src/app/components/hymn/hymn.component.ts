@@ -17,6 +17,7 @@ export class HymnComponent {
   PrevHymn: number = 0
   audioPlayer: string = ""
   status: OnlineStatusType = this.onlineStatusService.getStatus(); // get initial status
+  showPlayer: boolean
 
   constructor(public hymnsService: HymnsproviderService, 
       public route: ActivatedRoute, 
@@ -30,14 +31,25 @@ export class HymnComponent {
     this.route.paramMap.subscribe(params => {
       this.Number = parseInt(params.get('number') as string, 10);
       this.SelectedHymn = this.hymnsService.searchByNumber(this.Number);
+      this.showPlayer = false;
       this.setNextLast();
-
-      this.getAudioFile();
     });
   }
 
+  isOnline()
+  {
+    return this.status == OnlineStatusType.ONLINE
+  }
+
+  showAudioPlayer()
+  {
+    this.showPlayer = true;
+    this.getAudioFile();
+  }
+
   getAudioFile() {
-    if(this.status == OnlineStatusType.ONLINE)
+    this.audioPlayer = '';
+    if(this.isOnline())
     {
       let filename = `${this.Number}.ogg`;
       const ref = this.firestorage.ref(filename);

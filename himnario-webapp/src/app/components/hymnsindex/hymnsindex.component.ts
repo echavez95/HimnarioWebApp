@@ -11,23 +11,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HymnsindexComponent {
   HymnsList: Hymn[]
   search: string
-  searchLabel: string
+  searchLabel: string[]
   VerseSearchResults: any[]
-  showSearchInfo: boolean
+  tagFilter: string
 
   constructor(public hymnsService: HymnsproviderService, public route: ActivatedRoute, private router: Router)
   {
-    this.HymnsList = Array<Hymn>();
-    this.VerseSearchResults = [];
-    this.showSearchInfo = false;
-    this.route.paramMap.subscribe(params => {
-      this.search = params.get('search') as string;
-      this.searchVerse();
+    this.route.queryParams.subscribe(params => {
+      this.search = params['search'];
+      this.tagFilter = params['tag'];
+      this.LoadHymns();
     });
   }
 
-  searchVerse()
+  LoadHymns()
   {
+    this.HymnsList = Array<Hymn>();
+    this.VerseSearchResults = [];
+    this.searchLabel = ['',''];
+    
     if(this.search!=null)
     {
       if(!isNaN(parseFloat(this.search)))
@@ -39,11 +41,19 @@ export class HymnsindexComponent {
       {
         if(this.search.trim()!='')
         {
-          this.HymnsList = this.hymnsService.searchVerse(this.search);
+          this.HymnsList = this.hymnsService.searchByVerse(this.search);
           this.VerseSearchResults = this.hymnsService.VerseSearchResults;
-          this.showSearchInfo = true;
-          this.searchLabel = this.search.slice();
+          this.searchLabel[0] = 'resultados de busqueda para';
+          this.searchLabel[1] = this.search.slice();
         }
+      }
+    }
+    else if(this.tagFilter!=null)
+    {
+      if(this.hymnsService.tagExists(this.tagFilter)) {
+        this.HymnsList = this.hymnsService.searchByTag(this.tagFilter);
+        this.searchLabel[0] = 'Himnos con la etiqueta';
+        this.searchLabel[1] = this.tagFilter.slice();
       }
     }
     else 
@@ -52,12 +62,12 @@ export class HymnsindexComponent {
     }
   }
 
-  getVerseResults(number: number)
+  getVerseResults(numero: number)
   {
     if(this.VerseSearchResults.length > 0)
     {
       let verseList = new Array<string>();
-      this.VerseSearchResults.filter(x=> x.number == number).map(y=> y.match).forEach(verse=> {
+      this.VerseSearchResults.filter(x=> x.number == numero).map(y=> y.match).forEach(verse=> {
         verse.forEach((v: string) => { 
           if(v[0]=='>') v = v.substring(1);
           verseList.push(v) 
@@ -70,5 +80,19 @@ export class HymnsindexComponent {
     {
       return new Array<string>();
     }
+  }
+
+  redirect(page:string, value:string, event: Event)
+  {
+    event.stopPropagation();
+    if(page==='hymn')
+    {
+      this.router.navigate(['/hymn', value]);
+    }
+    else if(page === 'index')
+    {
+      this.router.navigate(['/index'], { queryParams : { tag : value }});
+    }
+    
   }
 }

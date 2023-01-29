@@ -9,16 +9,8 @@ const routes: Routes = [
     component: HymnsindexComponent
   },
   {
-    path: 'index/:search',
-    component: HymnsindexComponent
-  },
-  {
     path: 'hymn/:number',
     component: HymnComponent
-  },
-  { 
-    path: 'index', 
-    redirectTo: 'index/:search'
   },
   { 
     path: '**', 

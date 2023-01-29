@@ -8,14 +8,18 @@
             </div>
             <div class="col-12 col-md-10 text-center order-2 order-md-1">
                 <h4 class="card-title">{{SelectedHymn.titulo}}</h4>
-                <p class="card-text">
+                <h5 class="card-subtitle mb-2 text-muted">Himno {{SelectedHymn.numero}}</h5>
+                <ng-template ngFor let-subtema [ngForOf]="SelectedHymn.tema.subtema">
+                    <span [routerLink]="['/index']" [queryParams]="{ tag: subtema }" class="user-select-none badge bg-secondary me-1">{{subtema}}</span>
+                </ng-template>
+                <p class="card-text mt-3">
                     <ng-template ngFor let-verso [ngForOf]="SelectedHymn.versos">
                         <ng-template [ngIf]="verso.trim()!=''" [ngIfElse]="lineBreak">
                             <ng-template [ngIf]="verso[0]=='>'" [ngIfElse]="normal">
                                 <span class="fst-italic">{{verso.substring(1)}}</span><br/>
                             </ng-template>
                             <ng-template #normal>
-                                {{verso}}<br/>
+                                <span class="fst-normal">{{verso}}</span><br/>
                             </ng-template>
                         </ng-template>
                     </ng-template>
@@ -32,10 +36,16 @@
         </div>
     </div>
   </div>
-  <ng-template [ngIf]="audioPlayer!=''">
+
+  <ng-template [ngIf]="isOnline()">
     <div class="fixed-bottom bg-secondary">
-        <div class="row">
-            <div class="col-12 text-center p-0" [innerHTML]="audioPlayer"></div>
+        <div class="row" >
+            <div class="col-12 text-center p-2" *ngIf="!showPlayer">
+                <div class="btn btn-outline-light" (click)="showAudioPlayer()">
+                    <span class="bi-file-earmark-play"></span> Reproducir música del Himno
+                </div>
+            </div>
+            <div class="col-12 text-center p-0" [innerHTML]="audioPlayer" *ngIf="showPlayer"></div>
         </div>
     </div>
   </ng-template>
