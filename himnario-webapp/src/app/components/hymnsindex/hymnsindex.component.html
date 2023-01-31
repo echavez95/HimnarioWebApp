@@ -1,7 +1,7 @@
 <ng-template [ngIf]="HymnsList.length > 0" [ngIfElse]="emptyList">
     <div class="col-sm-12 d-block d-sm-none">
         <form class="d-flex" role="search" autocomplete="off">
-            <input class="form-control me-2 bg-dark text-light" 
+            <input class="form-control form-control-sm me-2 bg-dark text-light" 
                     type="search" placeholder="Buscar" aria-label="Buscar" 
                     [(ngModel)]="search" name="txtSearch" 
                     (keyup.enter)="LoadHymns()"
@@ -20,6 +20,16 @@
             <button type="button" class="btn btn-sm btn-outline-light" (click)="ResetIndex()">
                 Quitar filtro <span class="bi-x-circle"></span>
             </button>
+        </div>
+    </div>
+    <div class="d-flex my-3">
+        <div class="w-100">
+            <select class="form-select form-select-sm bg-dark text-light" [(ngModel)]="tagFilter" (change)="ChangeTag($event)">
+                <option [value]="''" selected>Todos los himnos</option>
+                <ng-template ngFor let-tag [ngForOf]="TagsList">
+                    <option [value]="tag">{{tag}}</option>
+                </ng-template>
+              </select>
         </div>
     </div>
     <ng-template ngFor let-hymn [ngForOf]="HymnsList">
@@ -66,3 +76,10 @@
         <a (click)="ResetIndex()" class="alert-link">Volver al índice</a>
     </div>
 </ng-template>
+<div class="d-flex align-items-center justify-content-center h-100">
+    <div class="w-100 text-center">
+        <span class="text-muted" style="font-size: 0.7rem">
+            Para la gloria de Dios por Eliezer Chavez 2023 | ea.chavarria95@gmail.com
+        </span>
+    </div>
+</div>

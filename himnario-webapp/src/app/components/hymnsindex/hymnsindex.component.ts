@@ -12,14 +12,16 @@ export class HymnsindexComponent {
   HymnsList: Hymn[]
   search: string
   searchLabel: string[]
+  TagsList: string[]
   VerseSearchResults: any[]
   tagFilter: string
 
   constructor(public hymnsService: HymnsproviderService, public route: ActivatedRoute, private router: Router)
   {
+    this.TagsList = this.hymnsService.getTagsList();
     this.route.queryParams.subscribe(params => {
-      this.search = params['search'];
-      this.tagFilter = params['tag'];
+      this.search = params['search'] ?? '';
+      this.tagFilter = params['tag'] ?? '';
       this.LoadHymns();
     });
   }
@@ -31,38 +33,39 @@ export class HymnsindexComponent {
     this.LoadHymns();
   }
 
+  ChangeTag(event: Event)
+  {
+    this.LoadHymns();
+  }
+
   LoadHymns()
   {
     this.HymnsList = Array<Hymn>();
     this.VerseSearchResults = [];
     this.searchLabel = ['',''];
-    
-    if(this.search!=null && this.search.trim()!='')
+    if(!isNaN(parseFloat(this.search)))
     {
-      if(!isNaN(parseFloat(this.search)))
-      {
-        let hymn = this.hymnsService.searchByNumber(parseFloat(this.search));
-        if(hymn!=null) this.router.navigate(['/hymn', hymn.numero]);
-      }
-      else
-      {
-        this.HymnsList = this.hymnsService.searchByVerse(this.search);
-        this.VerseSearchResults = this.hymnsService.VerseSearchResults;
-        this.searchLabel[0] = 'resultados de busqueda para';
-        this.searchLabel[1] = this.search.slice();
-      }
+      let hymn = this.hymnsService.searchByNumber(parseFloat(this.search));
+      if(hymn!=null) this.router.navigate(['/hymn', hymn.numero]);
     }
-    else if(this.tagFilter!=null && this.tagFilter.trim()!='')
+    else
     {
-      if(this.hymnsService.tagExists(this.tagFilter)) {
-        this.HymnsList = this.hymnsService.searchByTag(this.tagFilter);
-        this.searchLabel[0] = 'Himnos con la etiqueta';
-        this.searchLabel[1] = this.tagFilter.slice();
-      }
+      this.HymnsList = this.hymnsService.searchByVerseAndTag(this.search, this.tagFilter);
+      this.VerseSearchResults = this.hymnsService.VerseSearchResults;
+      this.generateSearchResultLabel();
     }
-    else 
+  }
+
+  generateSearchResultLabel() {
+    if(this.search.trim()!='')
     {
-      this.HymnsList = this.hymnsService.HymnsList;
+      this.searchLabel[0] = 'resultados de busqueda para';
+      this.searchLabel[1] = this.search.slice();
+    }
+    else if(this.search.trim()=='' && this.tagFilter.trim()!='')
+    {
+      this.searchLabel[0] = 'Himnos con la etiqueta';
+      this.searchLabel[1] = this.tagFilter.slice();
     }
   }
 

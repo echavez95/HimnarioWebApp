@@ -37,6 +37,47 @@ export class HymnsproviderService
     return this.HymnsList.filter(x => x.numero == hymnNumber)[0];
   }
 
+  searchByVerseAndTag(verse: string, tag: string)
+  {
+    let result = Array<Hymn>();
+    this.VerseSearchResults = [];
+
+    if(verse!=null && verse.trim()!='')
+    {
+      this.VerseSearchResults = [];
+
+      this.HymnsList.forEach(h => {
+        let verseMatch = h.versos.filter(v => this.removeAccents(v.trim().toLowerCase()).includes(this.removeAccents(verse).toLowerCase()));
+        if(verseMatch.length > 0) {
+          result.push(h);
+          this.VerseSearchResults.push({
+            number: h.numero,
+            match: verseMatch
+          });
+        }
+      })
+    }
+    else 
+    {
+      result = this.HymnsList;
+    }
+
+    if(tag!=null && tag.trim()!='')
+    {
+      let resulttag = result.filter(h=> h.tema.titulo === tag);
+      if(resulttag.length > 0)
+      {
+        result = resulttag;
+      }
+      else
+      {
+        result = result.filter(h=> h.tema.subtema.includes(tag));
+      }
+    }
+
+    return result;
+  }
+
   searchByVerse(verse: string)
   {
     let result = Array<Hymn>();
@@ -125,5 +166,16 @@ export class HymnsproviderService
       return true;
     })
     return exists;
+  }
+
+  getTagsList()
+  {
+    let tags = Array<string>();
+    this.ThemesList.forEach(t => {
+       t.subtemas.forEach(s => {
+         tags.push(s.titulo);
+       });
+    });
+    return tags.sort();
   }
 }

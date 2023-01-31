@@ -35,14 +35,22 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center h-100 mt-4">
+    <div class="w-100 text-center">
+        <span class="text-muted" style="font-size: 0.7rem">
+            Por Eliezer Chavez 2023 | ea.chavarria95@gmail.com 
+        </span>
+    </div>
+</div>
 
   <ng-template [ngIf]="isOnline()">
     <div class="fixed-bottom bg-secondary">
         <div class="row" >
             <div class="col-12 text-center p-2" *ngIf="!showPlayer">
                 <div class="btn btn-outline-light" (click)="showAudioPlayer()">
-                    <span class="bi-file-earmark-play"></span> Reproducir música del Himno
+                    <span class="bi-file-earmark-play"></span> Escuchar música del Himno
                 </div>
             </div>
             <div class="col-12 text-center p-0" [innerHTML]="audioPlayer" *ngIf="showPlayer"></div>
